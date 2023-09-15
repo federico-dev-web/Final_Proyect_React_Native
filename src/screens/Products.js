@@ -1,41 +1,42 @@
-import { StyleSheet, View, FlatList } from 'react-native'
+import { StyleSheet, FlatList, SafeAreaView } from 'react-native'
 import Head from '../components/Head.js'
 import Search from '../components/Search.js'
 import { products } from "../data/products.js";
 import ProductItem from '../components/ProductItem.js';
 import { useState, useEffect } from 'react';
 
-const Products = ( {setCategorySelected, category} ) => {
+const Products = ({ route, navigation }) => {
+
+    const { category } = route.params
 
     let productCategory =  category ? products.filter( (el) => (el.category == category)) : products
 
     const [productsList, setProductsList] = useState( productCategory )
     const [filter, setFilter] = useState("")
-
+    
     useEffect(
         () => {
             const filterProdList = productCategory.filter( (el) => el.title.toLocaleLowerCase().includes(filter.toLocaleLowerCase()) )
             setProductsList(filterProdList)
-        }, 
-        [filter])
-    
+        }, [filter]) 
 
     return (
-    <View style={styles.container}>
-        <Head title={category} text={"<- Regresar al Home"} setCategorySelected={setCategorySelected} />
+    <SafeAreaView style={styles.container}>
+        <Head title={category} text={"<- Regresar al Home"} navigation={navigation} />
         <Search filter={filter} setFilter={setFilter}  />
         <FlatList
-        data={productsList}
-        keyExtractor={products.id}
-        renderItem={ ({ item }) => <ProductItem item={item} /> }
+            style={styles.list}
+            data={productsList}
+            keyExtractor={productsList.id}
+            renderItem={ ({ item }) => ( <ProductItem item={item} navigation={navigation} /> ) }
         />
-    </View>
+    </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container:{
-        marginBottom: 415
+        marginBottom: 250
     }
 })
 

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import { colors } from "../theme/colors.js";
 
 const fitNameLength = (text) => { 
@@ -8,15 +8,17 @@ const fitNameLength = (text) => {
     return text
 }
 
-const ProductItem = ( {item} ) => {
+const ProductItem = ( {item, navigation} ) => {
     return (
-    <View style={styles.container}>
-        <Text style={styles.text}>{fitNameLength(item.title)}</Text>
-        <Image 
-            style={styles.image} 
-            source={{ uri:  item.images[0] }}
-        />
-    </View>
+            <View>
+                <Pressable style={styles.container} onPress={ () => navigation.navigate("productDetail",{item: item})}>
+                    <Text style={styles.text}>{fitNameLength(item.title)}</Text>
+                    <Image 
+                        style={styles.image} 
+                        source={{ uri:  item.images[0] }}
+                    />
+                </Pressable>
+            </View>
     )
 }
 
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
         borderColor: colors.verdeOscuro,
         borderRadius: 10,
         borderWidth: 3,
-        height: 100,
+        height: 80,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center'
@@ -36,11 +38,12 @@ const styles = StyleSheet.create({
     text: {
         marginHorizontal: 20,
         fontSize: 20,
-        fontWeight: '400'
+        fontWeight: '400',
+        fontFamily: "Quicksand"
     },
     image: {
-        height: 80,
-        width: 100
+        height: 60,
+        width: 80
     }
 })
 

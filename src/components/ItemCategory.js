@@ -1,15 +1,9 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native'
 import { colors } from "../theme/colors.js";
-import { useState } from 'react';
 
-const ItemCategory = ( {setCategoryFilter, category} ) => {
-
-    const selectCategory = (category) => { 
-        setCategoryFilter.setCategoryFilter(category)
-    }
-
+const ItemCategory = ( {category, navigation} ) => {
     return (
-        <Pressable onPress={ () => selectCategory(category) }>
+        <Pressable onPress={ () => navigation.navigate("products", {category: category,} ) }>
             <View style={styles.container}>
                 <Text style={styles.texto}>{category}</Text>
             </View>
@@ -32,7 +26,8 @@ const styles = StyleSheet.create({
     },
     texto: {
         color: colors.verdeOscuro,
-        fontSize: 20
+        fontSize: 20,
+        fontFamily: "Quicksand"
     }
 })
 

@@ -1,22 +1,28 @@
-import { View, StyleSheet } from 'react-native';
-import Home from "./src/screens/Home.js";
-import Products from "./src/screens/Products.js";
+import { StyleSheet } from 'react-native';
 import { colors } from './src/theme/colors.js';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useFonts } from 'expo-font';
+
+import RootNavigation from "./src/navigation/RootNavigation.js";
 
 
 export default function App() {
-
+  
   const [categorySelected, setCategorySelected] = useState("")
+
+  const [ fontsLoaded ] = useFonts({
+    Quicksand: require("./assets/Fonts/Quicksand-VariableFont_wght.ttf"),
+    QuicksandSemiBold: require("./assets/Fonts/Quicksand-SemiBold.ttf")
+  })
+
+  if(!fontsLoaded){
+    return
+  }
+
 
 
   return (
-    <View style={styles.all}>
-      {
-        categorySelected ? < Products setCategorySelected={setCategorySelected} category={categorySelected} /> : 
-        < Home setCategorySelected={setCategorySelected} />
-      }
-    </View>
+    <RootNavigation style={styles.all}/>
   );
 }
 

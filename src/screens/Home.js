@@ -1,33 +1,21 @@
-import { StyleSheet, View } from 'react-native'
+import { SafeAreaView, StyleSheet } from 'react-native'
 import Head from '../components/Head.js'
 import Categories from '../components/Categories.js'
-import { useState, useEffect } from 'react';
-
-const Home = (setCategorySelected ) => {
-
-    const [categoryFilter, setCategoryFilter] = useState("")
-
-    const screenToCategory = (category) => { 
-        setCategorySelected.setCategorySelected(category)
-    }
-
-    useEffect(() => {
-        screenToCategory(categoryFilter)    
-    }, [categoryFilter]) 
 
 
+const Home = ({ navigation }) => {
     return (
-    <View style={styles.container}>
-        <Head title={"Categorías"} text={"Elija una categoría"} />
-        <Categories setCategoryFilter={setCategoryFilter} />
-    </View>
+    <SafeAreaView style={styles.container}>
+        <Head navigation={navigation} title={"Categorías"} text={"Elija una categoría"} />
+        <Categories navigation={navigation} />
+    </SafeAreaView>
     )
 }
 
 
 const styles = StyleSheet.create({
     container:{
-        marginBottom: 350
+        marginBottom: 150
     }
 })
 

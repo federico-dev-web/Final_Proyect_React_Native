@@ -1,25 +1,16 @@
-import { FlatList, StyleSheet } from 'react-native'
-import { colors } from "../theme/colors";
+import { FlatList } from 'react-native'
 import { categories } from "../data/categories.js";
 import ItemCategory from './ItemCategory';
-import { useState } from 'react';
 
-const Categories = (setCategoryFilter) => {
 
-    const [categorySelection, setCategorySelection] = useState("")
-
+const Categories = ({navigation}) => {
     return (
         <FlatList 
             data={ categories }
             keyExtractor={ (key) => key }
-            renderItem={ ( { item } ) =>  ( <ItemCategory setCategoryFilter={setCategoryFilter} category={ item } /> )  }
+            renderItem={ ( { item } ) =>  ( <ItemCategory category={ item } navigation={navigation} /> )  }
         />
     )
 }
-
-
-const styles = StyleSheet.create({
-
-})
 
 export default Categories
