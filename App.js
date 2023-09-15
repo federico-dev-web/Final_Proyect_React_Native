@@ -1,9 +1,11 @@
-import { StyleSheet } from 'react-native';
-import { colors } from './src/theme/colors.js';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { useState } from 'react';
 import { useFonts } from 'expo-font';
 
+
+import { colors } from "./src/theme/colors.js";
 import RootNavigation from "./src/navigation/RootNavigation.js";
+
 
 
 export default function App() {
@@ -16,7 +18,11 @@ export default function App() {
   })
 
   if(!fontsLoaded){
-    return
+    return (
+      <View style={styles.indicator}>
+        <ActivityIndicator size={100} color={colors.verdeOscuro}  />
+    </View>
+    )
   }
 
 
@@ -29,5 +35,10 @@ export default function App() {
 const styles = StyleSheet.create({
   all:{
     backgroundColor: colors.blanco,
+  },
+  indicator: {
+    flex: 1,
+    alignContent: 'center',
+    justifyContent: 'center'
   }
 });

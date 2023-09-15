@@ -14,11 +14,11 @@ const ItemCategory = ( {category, navigation} ) => {
 
 const styles = StyleSheet.create({
     container: {
-        borderColor: colors.ocre,
+        borderColor: colors.verdeClaro,
         borderWidth: 7,
         borderRadius: 20,
         margin: 5,
-        padding: 5,
+        padding: 20,
         width: "80%",
         alignItems: 'center',
         alignSelf: 'center',

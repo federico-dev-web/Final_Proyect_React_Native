@@ -22,7 +22,7 @@ const Products = ({ route, navigation }) => {
 
     return (
     <SafeAreaView style={styles.container}>
-        <Head title={category} text={"<- Regresar al Home"} navigation={navigation} />
+        <Head title={category} text={"<- Regresar a Home"} navigation={navigation} />
         <Search filter={filter} setFilter={setFilter}  />
         <FlatList
             style={styles.list}

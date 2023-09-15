@@ -11,7 +11,7 @@ const ProductDetail = ({route, navigation}) => {
 
     return (
     <View>
-        <Head title={item.title} text={`<- Volver a ${item.category}`} navigation={navigation}/>
+        <Head title={item.title} text={`<- Regresar a ${item.category}`} navigation={navigation}/>
         <View style={styles.container} >
             <Carousel item={item}/>
             <Text style={styles.title} > {item.title} </Text>
