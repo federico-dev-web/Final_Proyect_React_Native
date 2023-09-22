@@ -1,4 +1,8 @@
-import { StyleSheet, Text, View, Image, Button } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native'
+import { useDispatch } from "react-redux";
+
+import { addToCartList } from "../redux/slices/cartSlice.js";
+
 import { AntDesign } from '@expo/vector-icons'; 
 import Head from '../components/Head.js'
 import Carousel from '../components/Carousel.js'
@@ -6,11 +10,17 @@ import { colors } from '../theme/colors.js';
 
 
 const ProductDetail = ({route, navigation}) => {
+
+    const dispatch = useDispatch()
     
+    const addToCart = (item) => { 
+        dispatch(addToCartList(item))
+    }
+
     const { item } = route.params
 
     return (
-    <View>
+    <SafeAreaView>
         <Head title={item.title} text={`<- Regresar a ${item.category}`} navigation={navigation}/>
         <View style={styles.container} >
             <Carousel item={item}/>
@@ -24,9 +34,9 @@ const ProductDetail = ({route, navigation}) => {
         </View>
         <Button
             title='Agregar al carrito'
-            onPress={()=>{console.log("funciona");}}
+            onPress={()=>{addToCart(item)}}
         />
-    </View>
+    </SafeAreaView>
     )
 }
 

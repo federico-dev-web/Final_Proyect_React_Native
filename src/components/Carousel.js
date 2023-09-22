@@ -2,7 +2,6 @@ import { Pressable, StyleSheet, View, ImageBackground } from 'react-native'
 import { useState } from 'react'
 import { colors } from "../theme/colors.js";
 import { AntDesign } from '@expo/vector-icons'; 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Carousel = ({item}) => {
 
@@ -24,14 +23,6 @@ const Carousel = ({item}) => {
         setPicToShow(picToShow+1)
     }
     return (
-/*     <View>
-            <Pressable onPress={ () => changePic() }>
-                <Image 
-                        style={styles.image} 
-                        source={{ uri:  item.images[picToShow] }}
-                    />
-            </Pressable>
-        </View> */
         <View>
                 <ImageBackground style={styles.image} source={{ uri:  item.images[picToShow] }}>
                     <Pressable style={styles.button} onPress={ () => changePicBack() }>

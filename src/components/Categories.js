@@ -1,9 +1,11 @@
 import { FlatList, StyleSheet } from 'react-native'
-import { categories } from "../data/categories.js";
+import { useSelector } from "react-redux";
 import ItemCategory from './ItemCategory';
 
 
+
 const Categories = ({navigation}) => {
+    const categories = useSelector((state) => state.homeSlice.allCategories);
     return (
         <FlatList 
             data={ categories }

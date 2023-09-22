@@ -1,11 +1,15 @@
 import { StyleSheet, FlatList, SafeAreaView } from 'react-native'
 import Head from '../components/Head.js'
 import Search from '../components/Search.js'
-import { products } from "../data/products.js";
 import ProductItem from '../components/ProductItem.js';
 import { useState, useEffect } from 'react';
 
+import { useSelector } from "react-redux";
+
+
 const Products = ({ route, navigation }) => {
+    
+    const products = useSelector((state) => state.homeSlice.allProducts);
 
     const { category } = route.params
 

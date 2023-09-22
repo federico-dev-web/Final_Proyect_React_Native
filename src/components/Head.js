@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
         fontFamily: "QuicksandSemiBold"
     },
     text: {
-        fontSize: 35,
+        fontSize: 27,
         color: colors.verdeClaro,
-        padding: 30,
+        padding: 20,
         fontFamily: "QuicksandSemiBold"
     },
     link: {
