@@ -120,7 +120,7 @@ const Profile = () => {
     const openLocation = async (user) => {
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== "granted") {
-            setErrorMsg("no se otorgaron permisos para la ubicación");
+            alert("no se otorgaron permisos para la ubicación");
             return;
         }
     
@@ -173,14 +173,14 @@ const Profile = () => {
                 </View>
             </View>
         </Modal>
-        <Head title="Profile" />
+        <Head title="Tu Perfíl" />
         <View style={styles.container}>
             <Image 
                 style={styles.image} 
                 source={{ uri:  image }}
             />
             <Text style={styles.name}>{user ? user : 'Email'}</Text>
-            <Text style={styles.address}>{addressToShow?addressToShow:"Address"}</Text>
+            <Text style={styles.address}>{addressToShow?addressToShow:"Tu dirección"}</Text>
             <View style={styles.iconsContainer}>
                 <Pressable onPress={()=>{setModalVisible(!modalVisible)}}>
                     <AntDesign style={styles.icons} name="camerao" size={24} color="black" />
