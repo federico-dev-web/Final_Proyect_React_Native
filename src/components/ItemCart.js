@@ -1,21 +1,38 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import { colors } from "../theme/colors.js";
+import { Ionicons } from '@expo/vector-icons'; 
+
+import { removeFromCart } from "../redux/slices/cartSlice.js";
+
+import { useDispatch } from 'react-redux';
 
 const fitNameLength = (text) => { 
-    if (text.length > 18) {
-        return `${text.slice(0,16)}...`
+    if (text.length > 12) {
+        return `${text.slice(0,10)}...`
     }
     return text
 }
 
 const ItemCart = ( { item } ) => {
+
+    const dispatch = useDispatch()
+
+    const removeItem = (item) => { 
+        dispatch(removeFromCart(item))
+    }
+    
     return (
         <View style={styles.container}>
+            <Text style={styles.text}>{item.count}</Text>
+            <Text style={styles.text}>x</Text>
             <Text style={styles.text}>{fitNameLength(item.title)}</Text>
             <Image 
                 style={styles.image} 
                 source={{ uri:  item.images[0] }}
             />
+            <Pressable onPress={ () => removeItem(item) }>
+                <Ionicons name="ios-trash-outline" size={24} color="black" />
+            </Pressable>
         </View>
     )
 }
@@ -35,13 +52,13 @@ const styles = StyleSheet.create({
     },
     text: {
         marginHorizontal: 20,
-        fontSize: 20,
+        fontSize: 16,
         fontWeight: '400',
         fontFamily: "Quicksand"
     },
     image: {
-        height: 60,
-        width: 80
+        height: 40,
+        width: 55
     }
 })
 

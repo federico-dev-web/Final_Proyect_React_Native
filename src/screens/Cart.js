@@ -20,7 +20,7 @@ const Cart = () => {
             />
         </View>
         <Text style={styles.text}>
-            Total: $ {cart ? ( cart.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0) ) : (0)} 
+            Total: $ {cart ? ( cart.reduce((accumulator, currentValue) => accumulator + currentValue.price*currentValue.count, 0) ) : (0)} 
         </Text>
         <View style={styles.container}>
             {cart[0] ? (
@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
         borderColor: colors.verdeOscuro,
         borderRadius: 20,
         borderWidth: 2,
-        width: "80%"
+        width: "80%",
+        maxHeight: 500
     },
     text: {
         alignSelf: 'center',

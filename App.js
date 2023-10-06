@@ -1,11 +1,9 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { useFonts } from 'expo-font';
 
-
 import { colors } from "./src/theme/colors.js";
-import TabNav from './src/navigation/TabNav.js';
+import MainNav from './src/navigation/MainNav.js';
 import { store } from "./src/redux/store.js";
 
 
@@ -26,10 +24,8 @@ export default function App() {
   }
 
   return (
-    <Provider store={store}>
-      <NavigationContainer style={styles.all}>
-        <TabNav/>
-      </NavigationContainer>
+    <Provider store={store} style={styles.all}>
+        <MainNav />
     </Provider>
   );
 }

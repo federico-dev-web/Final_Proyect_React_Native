@@ -53,22 +53,22 @@ const styles = StyleSheet.create({
     },
     title: {
         padding: 5,
-        fontSize: 25,
+        fontSize: 20,
         fontFamily: "Quicksand",
     },
     description: {
         padding: 5,
-        fontSize: 15,
+        fontSize: 13,
         fontFamily: "Quicksand",
     },
     rating: {
         padding: 5,
-        fontSize: 22,
+        fontSize: 18,
         fontFamily: "Quicksand",
     },
     text: {
         padding: 5,
-        fontSize: 20,
+        fontSize: 18,
         fontFamily: "Quicksand"
     }
 })
