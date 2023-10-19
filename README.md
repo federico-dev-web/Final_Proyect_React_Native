@@ -7,3 +7,7 @@ Este repositorio corresponde al proyecto integrador del curso de Desarrollo de A
 Se trata de una aplicación mobile de ecommerce desarrollada en React Native con el framework Expo.
 Empleamos Redux para el manejo de estados globales y Firebase para el origen de la información de productos y la autenticación.
 La aplicación entre las funcionalidades del perfíl del usuario incluye el acceso a la cámara o galería de imágenes y a la ubicación.
+
+
+Link al APK:
+https://expo.dev/artifacts/eas/62Px5ESbBG9DdGF3CoMEaF.apk
