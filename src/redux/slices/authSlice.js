@@ -18,7 +18,7 @@ const authSlice = createSlice({
             state.imageCamera = action.payload;
         },
         clearUser: (state) => {
-            (state.user = null), (state.idToken = null);
+            (state.user = ''), (state.idToken = '');
         },
 
     }

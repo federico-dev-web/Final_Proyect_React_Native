@@ -14,9 +14,11 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
 
 import { useGetImageQuery, usePutImageMutation, useGetLocationQuery, usePutLocationMutation } from "../services/ecommerceApi.js"
-import { setCameraImage } from '../redux/slices/authSlice.js'
+import { setCameraImage, clearUser } from '../redux/slices/authSlice.js'
 
 import { useDispatch } from "react-redux"
+
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 const Profile = () => {
@@ -35,6 +37,8 @@ const Profile = () => {
     //estado de modal que permite elegir la camara o la galeria
     const [modalVisible, setModalVisible] = useState(false);
     const [mapModalVisible, setMapModalVisible] = useState(false);
+    //modal de cierre de session
+    const [sessionLogOutModal, setSessionLogOutModal] = useState(false);
     
     //trae el usuario del slice
     const user = useSelector(state => state.authSlice.user);
@@ -129,6 +133,11 @@ const Profile = () => {
         setMapModalVisible(!mapModalVisible);
     }
 
+    const logOut = async () => { 
+        await AsyncStorage.removeItem("savedSession")
+        dispatch(clearUser())
+    }
+
 
     return (
     <SafeAreaView>
@@ -173,6 +182,26 @@ const Profile = () => {
                 </View>
             </View>
         </Modal>
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={sessionLogOutModal}
+        onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+            setSessionLogOutModal(!sessionLogOutModal);
+        }}>
+            <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                    <Text>¿Estas seguro que deseas cerrar sesion?</Text>
+                    <Pressable style={[styles.button, styles.buttonClose]} onPress={() => {logOut(); setSessionLogOutModal(!sessionLogOutModal)}}>
+                        <Text style={styles.textStyle}>Log Out</Text>
+                    </Pressable>
+                    <Pressable style={[styles.button, styles.buttonClose]} onPress={() => {setSessionLogOutModal(!sessionLogOutModal)}}>
+                        <Text style={styles.textStyle}>Regresar</Text>
+                    </Pressable>
+                </View>
+            </View>
+        </Modal>
         <Head title="Tu Perfíl" />
         <View style={styles.container}>
             <Image 
@@ -188,8 +217,8 @@ const Profile = () => {
                 <Pressable onPress={()=>{openLocation(user.replace(/[^a-zA-Z0-9]/g,'-'))}}>
                     <Ionicons style={styles.icons} name="ios-location-outline" size={24} color="black" />
                 </Pressable>
-                <Pressable onPress={()=>{console.log("datos");}}>
-                    <SimpleLineIcons style={styles.icons} name="notebook" size={24} color="black" />
+                <Pressable onPress={()=>setSessionLogOutModal(!sessionLogOutModal)}>
+                    <AntDesign style={styles.icons} name="logout" size={24} color="black" />
                 </Pressable>
             </View>
         </View>
@@ -278,6 +307,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 10,
         elevation: 2,
+        margin: 10
     },
     buttonOpen: {
         backgroundColor: '#F194FF',

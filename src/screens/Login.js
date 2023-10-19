@@ -9,6 +9,8 @@ import { setIdToken, setUser } from "../redux/slices/authSlice.js"
 
 import { colors } from "../theme/colors.js"
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const Login = ({ navigation }) => {
     const dispatch = useDispatch()
     const [email, setEmail] = useState("")
@@ -17,6 +19,10 @@ const Login = ({ navigation }) => {
     const handleLogin = async () => {
         try {
         const response = await signInWithEmailAndPassword( firebase_auth, email, password )
+        await AsyncStorage.setItem("savedSession", JSON.stringify({
+            email: response.user.email,
+            idToken: response._tokenResponse.idToken
+        }))
         dispatch(setUser(response.user.email))
         dispatch(setIdToken(response._tokenResponse.idToken))
         } catch (err) {
